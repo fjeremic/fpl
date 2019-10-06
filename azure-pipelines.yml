@@ -13,11 +13,6 @@ steps:
     git config --global user.name "$(github_user)"
   displayName: 'Configure global git user'
 
-- script: |
-    ls -alrt ./h2h/standings
-    cat ./h2h/standings/q1.json
-  displayName: 'Echo Q1 JSON file'
-
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '3.6'
@@ -39,10 +34,12 @@ steps:
     FPL_LEAGUE_ID: $(fpl_league_id)
 
 - script: |
+    DATE=$(date +%Y%m%d-%H%M)
     git status
-  displayName: 'Echo git status'
+    git add --all
+    git commit -m "Update H2H standings ${DATE}"
+  displayName: 'Create git commit'
 
 - script: |
-    ls -alrt ./h2h/standings
-    cat ./h2h/standings/q1.json
-  displayName: 'Echo Q1 JSON file'
+    git push origin master
+  displayName: 'Push changes to remote'
