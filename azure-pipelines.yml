@@ -1,11 +1,6 @@
 pool:
   vmImage: 'ubuntu-latest'
 
-variables:
-  FPL_USERNAME: $(fpl_username)
-  FPL_PASSWORD: $(fpl_password)
-  FPL_LEAGUE_ID: $(fpl_league_id)
-
 steps:
 - checkout: self
   clean: true
@@ -21,6 +16,11 @@ steps:
     scriptSource: 'filePath'
     scriptPath: 'generate_h2h_standings.py'
   displayName: 'Run generate_h2h_standings.py'
+  
+  env:
+    FPL_USERNAME: $(fpl_username)
+    FPL_PASSWORD: $(fpl_password)
+    FPL_LEAGUE_ID: $(fpl_league_id)
 
 - script: |
     git status
