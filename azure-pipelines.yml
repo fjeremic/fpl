@@ -1,0 +1,31 @@
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  FPL_USERNAME: $(fpl_username)
+  FPL_PASSWORD: $(fpl_password)
+  FPL_LEAGUE_ID: $(fpl_league_id)
+
+steps:
+- checkout: self
+  clean: true
+  persistCredentials: true
+
+- script: |
+    git config --global user.email "$(github_email)"
+    git config --global user.name "$(github_user)"
+  displayName: 'Configure git global user'
+
+- task: PythonScript@0
+  inputs:
+    scriptSource: 'filePath'
+    scriptPath: 'generate_h2h_standings.py'
+  displayName: 'Run generate_h2h_standings.py'
+
+- script: |
+    git status
+  displayName: 'Echo git status'
+
+- script: |
+    cat q1.json
+  displayName: 'Echo Q1 JSON file'
