@@ -72,7 +72,7 @@ response = session.post("https://users.premierleague.com/accounts/login/", data 
 if "Incorrect email or password" in response.text:
     raise RuntimeError("Incorrect username or password!")
 
-data = session.get("https://fantasy.premierleague.com/api/leagues-h2h/{:d}/standings".format(os.environ["FPL_LEAGUE_ID"])).json()
+data = session.get("https://fantasy.premierleague.com/api/leagues-h2h/{}/standings".format(os.environ["FPL_LEAGUE_ID"])).json()
 
 # Parse all the players
 players = []
@@ -81,7 +81,7 @@ for player in data["standings"]["results"]:
 
 # Parse all the gameweeks (login required) using the number of players
 fixtures = []
-fixtures_url = "https://fantasy.premierleague.com/api/leagues-h2h-matches/league/{:d}/?page={{:d}}".format(os.environ["FPL_LEAGUE_ID"])
+fixtures_url = "https://fantasy.premierleague.com/api/leagues-h2h-matches/league/{}/?page={{:d}}".format(os.environ["FPL_LEAGUE_ID"])
 
 for page in itertools.count(1):
     page_data = session.get(fixtures_url.format(page)).json()["results"]
