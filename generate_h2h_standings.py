@@ -98,7 +98,7 @@ gameweeks = []
 for i in range(38):
     gameweeks.append(fixtures[i * (len(players) // 2) : (i + 1) * (len(players) // 2)])
 
-generate_standings("q1.json", players, gameweeks, (0, 9))
-generate_standings("q2.json", players, gameweeks, (10, 18))
-generate_standings("q3.json", players, gameweeks, (19, 28))
-generate_standings("q4.json", players, gameweeks, (29, 37))
+generate_standings("./h2h/standings/q1.json", players, gameweeks, (0, 9))
+generate_standings("./h2h/standings/q2.json", players, gameweeks, (10, 18))
+generate_standings("./h2h/standings/q3.json", players, gameweeks, (19, 28))
+generate_standings("./h2h/standings/q4.json", players, gameweeks, (29, 37))
