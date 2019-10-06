@@ -13,6 +13,10 @@ steps:
     git config --global user.name "$(github_user)"
   displayName: 'Configure global git user'
 
+- script: |
+    git checkout master
+  displayName: 'Checkout master branch'
+
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '3.6'
