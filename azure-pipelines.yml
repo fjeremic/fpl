@@ -41,7 +41,7 @@ steps:
     DATE=$(date +%Y%m%d-%H%M)
     git status
     git add --all
-    git commit -m "Update H2H standings ${DATE}"
+    git diff-index --quiet HEAD || git commit -m "Update H2H standings ${DATE}"
   displayName: 'Create git commit'
 
 - script: |
